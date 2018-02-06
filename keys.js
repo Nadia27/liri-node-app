@@ -1,6 +1,8 @@
 console.log('this is loaded'); 
 
-exports.twitter = {
+
+
+exports.twitter = { 
 
 	consumer_key: process.env.TWITTER_CONSUMER_KEY, 
 
@@ -10,7 +12,7 @@ exports.twitter = {
 
 	access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 
-}; 
+};
 
 exports.spotify = {
 
