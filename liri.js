@@ -4,6 +4,8 @@ require("dotenv").config();
 //Include keys.js in file
 var keys = require("./keys.js");
 
+console.log(keys);
+
 // fs is a core Node package for reading and writing files
 var fs = require("fs"); 
 
@@ -11,7 +13,7 @@ var fs = require("fs");
 var Twitter = require('twitter');
 
 //Include Spotify package
-var Spotify = require('spotify');
+var Spotify = require('node-spotify-api');
 
 //Grants access to key information
 var spotify = new Spotify(keys.spotify); 
