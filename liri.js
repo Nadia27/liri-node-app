@@ -4,10 +4,14 @@ require("dotenv").config();
 //Include keys.js in file
 var keys = require("./keys.js");
 
-console.log(keys);
-
 // fs is a core Node package for reading and writing files
 var fs = require("fs"); 
+
+// Include the inquirer npm package 
+var inquirer = require('inquirer');
+
+// Include the request npm package 
+var request = require("request");
 
 //Include Twitter package 
 var Twitter = require('twitter');
@@ -20,50 +24,135 @@ var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 
 //Take command line arguements 
-var commands = process.argv[2]; 
+//var commands = process.argv[2]; 
 var search = process.argv[3]; 
 
 
 
-switch(commands) {
+//Search spotify for a song
+function spotify() {
 
-	case "my-tweets":
+	inquirer.prompt({
+
+		name:'song', 
+
+		message: 'What is the song title?'
 	
-	myTweets();
+	}).then(function(answer) {
 
-	break; 
-
-
-	case "spotify-this-song":
+		console.log(answer);
+		
+	});
 	
-	spotify(); 
-	
-	break; 
-
-
-	case "movie-this":
-	
-	omdb(); 
-
-	break; 
-
-	case "do-what-it-says":
-	
-	doSay(); 
-
-	break; 
 }
 
+
+
+//Prompt user to select a command at initial load
+function getCommand() {
+	
+	inquirer.prompt({
+		
+		name: 'command',
+		
+		type: 'rawlist',
+		
+		message: 'What command would you like to run?',
+		
+		choices: ['Search spotify for a song','Show my Tweets', 'Search a movie', 'Do what it says']
+	
+	}).then(function(answer) {
+
+		console.log(answer);
+		
+		var command = answer.command;
+
+		switch(command) {
+			
+			case 'Search spotify for a song':
+				
+				spotify();
+				
+				break;
+			
+			case 'my-tweets':
+				
+				tweet();
+
+				break;
+				
+				//getCommand();
+		}
+	});
+}
+
+getCommand(); // Ask the user which command they want to run initially
+
+
+
+
+
+
+
+
+
+
+
+
 /*
-spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
+
+if (commands == "spotify-this-song") {
+
+	//console.log("MUSIC IS LIFE!"); 
+
+	spotify.search({ type: 'track', query: search, limit: 1 }, function(err, data) {
+  
+  		if (err) {
     
-    if ( err ) {
-        console.log('Error occurred: ' + err);
-        return;
-    }
+    		return console.log('Error occurred: ' + err);
+  		}
  
-    console.log(data); 
+
+		var tracks = data.tracks.items;
+
+		
+		console.log(tracks); 
+
+		for (var i = 0; i < tracks.length; i++) {
+	
+			console.log(tracks.album.artists[0].name + "Song Name: " + tracks[i].name + '\n' + "Album Name: " + tracks[i].album.name + '\n' + "Preview Url: " + tracks[i].preview_url + '\n'); 
+		
+
+		};
+
+
+
+	});
+
+}
+*/
+
+
+
+
+/*var params = {
+
+	screen_name: 'jonesnadial1', 
+	count: 20
+};
+
+function myTweets() {
+
+client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  
+  if (!error) {
+    
+    console.log(tweets);
+  }
+
 });
+
+}
 */
 
 
@@ -81,18 +170,4 @@ spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(er
 
 
 
-
-/*var params = {
-	
-	count: 2
-};
-
-client.get('statuses/home_timeline', params, function(error, tweets, response) {
-  
-
-   if (error) {
-        console.log(error);
-
-	}
-});*/
 
