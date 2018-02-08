@@ -55,7 +55,7 @@ function searchSpotify() {
 
 			for (var i = 0; i < tracks.length; i++) {
 	
-				console.log(tracks.album.artists[0].name + "Song Name: " + tracks[i].name + '\n' + "Album Name: " + tracks[i].album.name + '\n' + "Preview Url: " + tracks[i].preview_url + '\n'); 
+				console.log(/*tracks.album.artists[0].name +*/ "Song Name: " + tracks[i].name + '\n' + "Album Name: " + tracks[i].album.name + '\n' + "Preview Url: " + tracks[i].preview_url + '\n'); 
 		
 
 			};
@@ -69,6 +69,145 @@ function searchSpotify() {
 	
 }
 
+
+function tweets() {
+
+	inquirer.prompt({
+
+		name:'my-tweets', 
+
+		//Question to user
+		message: 'What is your twitter screen name?'
+	
+	}).then(function(answer) {
+
+		console.log(answer); 
+		
+		var params = {
+
+			screen_name: 'jonesnadial1', 
+	
+			count: 1
+		};
+
+
+
+		client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  
+ 			if (!error) {
+    
+    			console.log(tweets);
+  		
+  			}
+
+		});
+
+
+	});
+
+}
+
+
+function ombd() {
+
+	inquirer.prompt({
+
+		name:'movie', 
+
+		//Question to user
+		message: 'What moveie would you like to search?'
+	
+	}).then(function(answer) {
+
+		//console.log(answer); 
+
+		var flick = answer.movie;
+    			
+
+		if(flick === "") {
+
+			request("http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=40e9cece", function(error, response, body) {
+
+
+    			var location =  JSON.parse(body);
+  
+  				// If the request is successful = 200
+  			
+  				if (!error && response.statusCode === 200) {
+
+    			// Parse the body of the site and recover info
+    
+					console.log("-------------------------------------------------------------------");
+    				console.log("-------------------------------------------------------------------");
+
+    				console.log("Movie title: " + location.Title + '\n' 
+
+   				 			+ "Year released: " + location.Year + '\n'
+
+   				 			+ "IMBD rating is: " + location.imdbRating + '\n'
+
+   				 			+ "Rotten Tomatoes rating is: " + location.Ratings[1].Source,location.Ratings[1].Value + '\n' 
+
+   				 			+ "Production country: " + location.Country + '\n'
+
+   				 			+ "Language: " + location.Language + '\n' 
+
+   				 			+ "Movie plot: " + location.Plot + '\n' 
+
+   				 			+ "Actors: " + location.Actors + '\n');
+
+    				console.log("-------------------------------------------------------------------");
+    				console.log("-------------------------------------------------------------------");
+
+  				};
+			
+			});
+
+		} else {
+
+			request("http://www.omdbapi.com/?t=" + flick + "&y=&plot=short&apikey=40e9cece", function(error, response, body) {
+
+				var location =  JSON.parse(body);
+
+  				// If the request is successful=200
+  
+  				if (!error && response.statusCode === 200) {
+
+    		    	//console.log(JSON.parse(body));
+
+
+    				console.log("-------------------------------------------------------------------");
+    				console.log("-------------------------------------------------------------------");
+
+   				
+   					console.log("Movie title: " + location.Title + '\n' 
+
+   				 			+ "Year released: " + location.Year + '\n'
+
+   				 			+ "IMBD rating is: " + location.imdbRating + '\n'
+
+   				 			+ "Rotten Tomatoes rating is: " + location.Ratings[1].Source,location.Ratings[1].Value + '\n' 
+
+   				 			+ "Production country: " + location.Country + '\n'
+
+   				 			+ "Language: " + location.Language + '\n' 
+
+   				 			+ "Movie plot: " + location.Plot + '\n' 
+
+   				 			+ "Actors: " + location.Actors + '\n');
+
+  					console.log("-------------------------------------------------------------------");
+  					console.log("-------------------------------------------------------------------");
+		
+  				};
+		
+			});
+				
+		};
+	
+	});
+
+}
 
 
 //Prompt user to select a command at initial 
@@ -99,13 +238,18 @@ function getCommand() {
 				
 				break;
 			
-			case 'my-tweets':
+			case 'Show my Tweets':
 				
+
 				tweets();
 
 				break;
 				
-				//getCommand();
+			case 'Search a movie':
+
+			ombd(); 
+
+			break; 
 		}
 	});
 }
@@ -130,24 +274,6 @@ getCommand();
 
 
 
-var params = {
-
-	screen_name: 'jonesnadial1', 
-	count: 20
-};
-
-function tweets() {
-
-client.get('statuses/user_timeline', params, function(error, tweets, response) {
-  
-  if (!error) {
-    
-    console.log(tweets);
-  }
-
-});
-
-}
 
 
 
