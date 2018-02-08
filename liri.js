@@ -42,8 +42,7 @@ function searchSpotify() {
 
 		spotify.search({ type: 'track', query: song, limit: 1 }, function(err, data) {
 
-			//console.log(data); 
-  
+	
   			if (err) {
     
     			return console.log('Error occurred: ' + err);
@@ -57,6 +56,13 @@ function searchSpotify() {
 			//console.log(data.tracks.items[0].value); 
 
 			//console.log(tracks); 
+
+			var musician;
+
+			for (musician in tracks) {
+
+				console.log(tracks[musician].artists);
+			}
 
 			for (var i = 0; i < tracks.length; i++) {
 
@@ -115,12 +121,22 @@ function tweets() {
     
     			//console.log(tweet);
 
-    			var info = tweet;
+    			//var info = tweet;
+
+
 
     			var posts;
 
     			for (posts in tweet) {
+
+    				console.log("-------------------------------------------------------------------");
+    				
     				console.log(tweet[posts].text);
+
+    				console.log("-------------------------------------------------------------------");
+    				
+
+
 				};
   		
   			};
