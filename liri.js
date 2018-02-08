@@ -41,6 +41,8 @@ function searchSpotify() {
 		var song = answer.song; 
 
 		spotify.search({ type: 'track', query: song, limit: 1 }, function(err, data) {
+
+			//console.log(data); 
   
   			if (err) {
     
@@ -50,12 +52,27 @@ function searchSpotify() {
 
 			var tracks = data.tracks.items;
 
-		
+			//var more = data.tracks.items[0].value; 
+
+			//console.log(data.tracks.items[0].value); 
+
 			//console.log(tracks); 
 
 			for (var i = 0; i < tracks.length; i++) {
+
+				console.log("-------------------------------------------------------------------");
+    			console.log("-------------------------------------------------------------------");
+
 	
-				console.log(/*tracks.album.artists[0].name +*/ "Song Name: " + tracks[i].name + '\n' + "Album Name: " + tracks[i].album.name + '\n' + "Preview Url: " + tracks[i].preview_url + '\n'); 
+				console.log("Song Name: " + tracks[i].name + '\n' 
+
+							+ "Album Name: " + tracks[i].album.name + '\n' 
+
+							+ "Preview Url: " + tracks[i].preview_url + '\n');
+
+				console.log("-------------------------------------------------------------------");
+    			 console.log("-------------------------------------------------------------------");
+ 
 		
 
 			};
@@ -87,18 +104,26 @@ function tweets() {
 
 			screen_name: 'jonesnadial1', 
 	
-			count: 1
+			count: 20
 		};
 
 
 
-		client.get('statuses/user_timeline', params, function(error, tweets, response) {
+		client.get('statuses/user_timeline', params, function(error, tweet, response) {
   
  			if (!error) {
     
-    			console.log(tweets);
+    			//console.log(tweet);
+
+    			var info = tweet;
+
+    			var posts;
+
+    			for (posts in tweet) {
+    				console.log(tweet[posts].text);
+				};
   		
-  			}
+  			};
 
 		});
 
@@ -210,6 +235,40 @@ function ombd() {
 }
 
 
+function doSay() {
+
+	// This block of code will read from the "random.txt" file.
+	// It's important to include the "utf8" parameter 
+	// will store the contents of the reading inside the variable "data"
+	fs.readFile("random.txt", "utf8", function(error, data) {
+
+  	// If the code experiences any errors it will log the error to the console.
+  	if (error) {
+    
+    	return console.log(error);
+  	}
+
+  	// We will then print the contents of data
+  	console.log(data);
+
+ 	 //var text = data.substring();
+
+ 	 var sep = data.substr(0, 17);
+
+ 	 var sep2 = data.substr(19, 28);
+
+ 	 	console.log(sep);
+
+ 	 /*	var argv1 = process.argv[2]; */
+
+ 	 	console.log(sep2);
+
+ 	 	
+});
+
+}
+
+
 //Prompt user to select a command at initial 
 function getCommand() {
 	
@@ -250,6 +309,12 @@ function getCommand() {
 			ombd(); 
 
 			break; 
+
+			case 'Do what it says':
+
+			doSay();
+
+			break;
 		}
 	});
 }
