@@ -51,17 +51,13 @@ function searchSpotify() {
 
 			var tracks = data.tracks.items;
 
-			//var more = data.tracks.items[0].value; 
-
-			//console.log(data.tracks.items[0].value); 
-
 			//console.log(tracks); 
 
 			var musician;
 
 			for (musician in tracks) {
 
-				console.log(tracks[musician].artists);
+				//console.log(tracks[musician].artists[0].name);
 			}
 
 			for (var i = 0; i < tracks.length; i++) {
@@ -70,7 +66,9 @@ function searchSpotify() {
     			console.log("-------------------------------------------------------------------");
 
 	
-				console.log("Song Name: " + tracks[i].name + '\n' 
+				console.log("Artist(s): " + tracks[musician].artists[0].name + '\n' 
+
+							+ "Song Name: " + tracks[i].name + '\n' 
 
 							+ "Album Name: " + tracks[i].album.name + '\n' 
 
