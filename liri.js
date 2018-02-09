@@ -129,12 +129,10 @@ function tweets() {
 	
 	}).then(function(answer) {
 
-		console.log(answer); 
+		//console.log(answer); 
 		
 		var params = {
 
-			screen_name: 'jonesnadial1', 
-	
 			count: 20
 		};
 
@@ -156,7 +154,11 @@ function tweets() {
 
     				console.log("-------------------------------------------------------------------");
     				
-    				console.log(tweet[posts].text);
+    				console.log("Tweet: " + tweet[posts].text);
+
+    				console.log("Posted on: " + tweet[posts].created_at);
+
+
 
     				console.log("-------------------------------------------------------------------");
     				
