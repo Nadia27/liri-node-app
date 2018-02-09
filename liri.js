@@ -38,16 +38,12 @@ function searchSpotify() {
 	
 	}).then(function(answer) {
 
-
-
 		var song = answer.song; 
 
 		if(song === "") {
 
-
 			console.log("-------------------------------------------------------------------");
     		console.log("-------------------------------------------------------------------");
-
 
 			console.log("Artist(s): Ace of Base" + '\n' 
 
@@ -58,8 +54,6 @@ function searchSpotify() {
 
 			console.log("-------------------------------------------------------------------");
     		console.log("-------------------------------------------------------------------");
-
-
 
 		}else {
 
@@ -88,7 +82,6 @@ function searchSpotify() {
 				console.log("-------------------------------------------------------------------");
     			console.log("-------------------------------------------------------------------");
 
-	
 				console.log("Artist(s): " + tracks[musician].artists[0].name + '\n' 
 
 							+ "Song Name: " + tracks[i].name + '\n' 
@@ -98,13 +91,9 @@ function searchSpotify() {
 							+ "Preview Url: " + tracks[i].preview_url + '\n');
 
 				console.log("-------------------------------------------------------------------");
-    			 console.log("-------------------------------------------------------------------");
+    			console.log("-------------------------------------------------------------------");
  
-		
-
 			};
-
-
 
 		});
 
@@ -113,8 +102,6 @@ function searchSpotify() {
 
 	});
 
-
-	
 }
 
 
@@ -136,19 +123,11 @@ function tweets() {
 			count: 20
 		};
 
-
-
 		client.get('statuses/user_timeline', params, function(error, tweet, response) {
   
  			if (!error) {
-    
-    			//console.log(tweet);
 
-    			//var info = tweet;
-
-
-
-    			var posts;
+				var posts;
 
     			for (posts in tweet) {
 
@@ -183,6 +162,7 @@ function ombd() {
 		name:'movie', 
 
 		//Question to user
+		
 		message: 'What moveie would you like to search?'
 	
 	}).then(function(answer) {
@@ -191,19 +171,17 @@ function ombd() {
 
 		var flick = answer.movie;
     			
-
-		if(flick === "") {
+			if(flick === "") {
 
 			request("http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=40e9cece", function(error, response, body) {
 
-
-    			var location =  JSON.parse(body);
+				var location =  JSON.parse(body);
   
   				// If the request is successful = 200
   			
   				if (!error && response.statusCode === 200) {
 
-    			// Parse the body of the site and recover info
+    				// Parse the body of the site and recover info
     
 					console.log("-------------------------------------------------------------------");
     				console.log("-------------------------------------------------------------------");
@@ -243,11 +221,9 @@ function ombd() {
 
     		    	//console.log(JSON.parse(body));
 
-
+					console.log("-------------------------------------------------------------------");
     				console.log("-------------------------------------------------------------------");
-    				console.log("-------------------------------------------------------------------");
 
-   				
    					console.log("Movie title: " + location.Title + '\n' 
 
    				 			+ "Year released: " + location.Year + '\n'
@@ -306,8 +282,7 @@ function doSay() {
 
  	 	console.log(sep2);
 
- 	 	
-});
+	});
 
 }
 
@@ -361,7 +336,6 @@ function getCommand() {
 		}
 	});
 }
-
 
 // Ask the user which command they want to run initially
 getCommand(); 
