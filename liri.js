@@ -140,10 +140,7 @@ function tweets() {
 
 
     				console.log("-------------------------------------------------------------------");
-    				
-
-
-				};
+    			};
   		
   			};
 
@@ -257,33 +254,54 @@ function ombd() {
 function doSay() {
 
 	// This block of code will read from the "random.txt" file.
-	// It's important to include the "utf8" parameter 
 	// will store the contents of the reading inside the variable "data"
 	fs.readFile("random.txt", "utf8", function(error, data) {
 
   	// If the code experiences any errors it will log the error to the console.
-  	if (error) {
+  		if (error) {
     
-    	return console.log(error);
-  	}
+    		return console.log(error);
+  		}
 
-  	// We will then print the contents of data
-  	console.log(data);
+		var text = data.substring(18);
 
- 	 //var text = data.substring();
+ 	 	console.log(text); 
 
- 	 var sep = data.substr(0, 17);
+ 		spotify.search({ type: 'track', query: text, limit: 1 }, function(err, data) {
+  
+			var tracks = data.tracks.items;
 
- 	 var sep2 = data.substr(19, 28);
+			//console.log(tracks); 
 
- 	 	console.log(sep);
+			var musician;
 
- 	 /*	var argv1 = process.argv[2]; */
+			for (musician in tracks) {
 
- 	 	console.log(sep2);
+				//console.log(tracks[musician].artists[0].name);
+			}
+
+			for (var i = 0; i < tracks.length; i++) {
+
+				console.log("-------------------------------------------------------------------");
+    			console.log("-------------------------------------------------------------------");
+
+				console.log("Artist(s): " + tracks[musician].artists[0].name + '\n' 
+
+							+ "Song Name: " + tracks[i].name + '\n' 
+
+							+ "Album Name: " + tracks[i].album.name + '\n' 
+
+							+ "Preview Url: " + tracks[i].preview_url + '\n');
+
+				console.log("-------------------------------------------------------------------");
+    			console.log("-------------------------------------------------------------------");
+ 
+			};
+
+		});
 
 	});
-
+ 
 }
 
 
