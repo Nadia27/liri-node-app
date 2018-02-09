@@ -38,7 +38,30 @@ function searchSpotify() {
 	
 	}).then(function(answer) {
 
+
+
 		var song = answer.song; 
+
+		if(song === "") {
+
+
+			console.log("-------------------------------------------------------------------");
+    		console.log("-------------------------------------------------------------------");
+
+
+			console.log("Artist(s): Ace of Base" + '\n' 
+
+						+ "Song Name: The Sign" + '\n' + "Album Name: The Sign" + '\n' 
+
+						+ "Preview Url: https://p.scdn.co/mp3-preview/4c463359f67dd3546db7294d236dd0ae991882ff?cid=c5e79124ab8a4b6ebec096645a75f191" );
+
+
+			console.log("-------------------------------------------------------------------");
+    		console.log("-------------------------------------------------------------------");
+
+
+
+		}else {
 
 		spotify.search({ type: 'track', query: song, limit: 1 }, function(err, data) {
 
@@ -85,8 +108,12 @@ function searchSpotify() {
 
 		});
 
+	};
+
 
 	});
+
+
 	
 }
 
