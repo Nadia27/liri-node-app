@@ -107,17 +107,6 @@ function searchSpotify() {
 
 function tweets() {
 
-	inquirer.prompt({
-
-		name:'my-tweets', 
-
-		//Question to user
-		message: 'What is your twitter screen name?'
-	
-	}).then(function(answer) {
-
-		//console.log(answer); 
-		
 		var params = {
 
 			count: 20
@@ -137,17 +126,12 @@ function tweets() {
 
     				console.log("Posted on: " + tweet[posts].created_at);
 
-
-
-    				console.log("-------------------------------------------------------------------");
+					console.log("-------------------------------------------------------------------");
     			};
   		
   			};
 
 		});
-
-
-	});
 
 }
 
