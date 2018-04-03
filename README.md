@@ -1,6 +1,6 @@
-# liri-node-app
+# LIRI-Node-App
 
-
+## Description
 LIRI is like iPhone's SIRI.  LIRI is a Language Interpretation and Recognition Interface.  The LIRI interface will allow the user to select from a list of options: 
 
 						1. Search Spotify a song
@@ -8,12 +8,12 @@ LIRI is like iPhone's SIRI.  LIRI is a Language Interpretation and Recognition I
 						3. Search OMBD for a movie
 						4. Do what I say (reads text file and perform action)
 
-#Getting Started 
+## Getting Started 
 
 This is a Node.js to retrieve the will power this app, you'll need to send request to the Twitter, Spotify, and OMDB APIs.  Head over to www.npmjs.com to download the need packages. 
 
 
-#Prerequisites
+## Prerequisites
 
 These packages can be found on www.npmjs.com as stated previous:  
 
